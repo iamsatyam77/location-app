@@ -1,0 +1,70 @@
+<div class="example-header">
+    <!-- <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field> -->
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+            <mat-icon>add_location</mat-icon>
+            Add
+            Location
+        </button>
+    </div>
+</div>
+
+<div class="example-container mat-elevation-z8">
+    <mat-toolbar color="primary"><span class="title-center">Locations</span>
+    </mat-toolbar>
+    <mat-table [dataSource]="dataSource" #tableMat matSort *ngIf="(dataSource && dataSource.data.length > 0)">
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Location Name</b> </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="addressLine1">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> <b>Address</b> </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.addressLine1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="phoneNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header><b>Phone No.</b></mat-header-cell>
+            <mat-cell *matCellDef="let row" [style.color]="row.phoneNo"> {{row.phoneNo}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef><b>Actions</b>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary"
+                    (click)="onEdit(row)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn"
+                    (click)="onDelete(row.id)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator *ngIf="dataSource && dataSource.data.length > 0" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    <div *ngIf="dataSource && dataSource.data.length === 0">
+        <div id="over" style="position: inherit; width:100%; height:100%">
+            <img src="https://static.thenounproject.com/png/198212-200.png">
+            <span class="title-center">
+                <p><b>Kindly Add Your Location First.</b></p>
+                <p>There is no location added right now</p>
+            </span>
+        </div>
+    </div>
+</div>

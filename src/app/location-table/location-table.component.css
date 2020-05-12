@@ -1,0 +1,46 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 17px 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+  float: right;
+}
+
+.title-center {
+  margin: 0 auto;
+}
+
+#over img {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+}
+
+#over span {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: block;
+}

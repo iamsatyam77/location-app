@@ -1,0 +1,127 @@
+<mat-toolbar>
+    <span>{{service.form.controls['id'].value?"Modify Location":"New Location"}}</span>
+    <span class="fill-remaining-space"></span>
+    <!-- <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button> -->
+</mat-toolbar>
+<div *ngIf="service.form">
+    <form [formGroup]="service.form" class="normal-form" (submit)="service.form.valid && onSubmit()">
+        <mat-grid-list cols="4" rowHeight="60px">
+            <mat-grid-tile [colspan]="4">
+                <div class="controles-container">
+                    <input type="hidden" formControlName="id">
+                    <mat-form-field>
+                        <input formControlName="name" matInput placeholder="Location Name*">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="addressLine1" matInput placeholder="Address Line 1">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="suiteNo" matInput placeholder="Suite No.">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="addressLine2" matInput placeholder="Address Line 2">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="city" matInput placeholder="City">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <mat-select formControlName="state" matInput placeholder="State">
+                            <mat-option *ngIf="service.stateList && service.stateList.length == 0">None</mat-option>
+                            <ng-container *ngFor="let stat of service.stateList">
+                                <mat-option value="{{stat}}">{{stat}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+
+
+            <mat-grid-tile [colspan]="1">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="zipCode" matInput placeholder="Zip Code">
+                        <mat-error *ngIf="service.form.controls['zipCode'].errors?.required">
+                            This field is mandatory.
+                        </mat-error>
+                        <mat-error *ngIf="service.form.controls['zipCode'].errors?.minlength">Zip Code should be minimum
+                            5
+                            character.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="(!service.form.controls['zipCode'].errors?.minlength && service.form.controls['zipCode'].errors?.pattern)">
+                            Zip Code should be in proper
+                            format.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="phoneNo" matInput placeholder="Phone Number">
+                        <mat-error *ngIf="service.form.controls['phoneNo'].errors?.required">This field is mandatory.
+                        </mat-error>
+                        <mat-error *ngIf="service.form.controls['phoneNo'].errors?.pattern">Phone No. should be in US
+                            format.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="timeZone" matInput placeholder="Time Zone">
+                        <mat-error>Invalid address address.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="facilityTimes" matInput [matDatepicker]="picker"
+                            placeholder="Facility Times">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="2">
+                <div class="controles-container">
+                    <mat-form-field>
+                        <input formControlName="appointmentPool" matInput placeholder="Appointment Pool">
+                        <mat-error>Invalid address address.</mat-error>
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <div class="button-row" style="float: right;">
+            <button mat-raised-button color="warn" (click)="onClose()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="service.form.invalid">Save</button>
+        </div>
+    </form>
+</div>
